@@ -669,7 +669,7 @@ var a3_lazyload_extend_params = {"edgeY":"0","horizontal_container_classnames":"
 </script>
 <script type='text/javascript' src='//jessicadivers.com/wp-content/plugins/a3-lazy-load/assets/js/jquery.lazyloadxt.extend.js?ver=2.7.0' id='jquery-lazyloadxt-extend-js'></script>
 <script type='text/javascript' src='https://c0.wp.com/c/5.7.12/wp-includes/js/wp-embed.min.js' id='wp-embed-js'></script>
-<script src='https://stats.wp.com/e-202440.js' defer></script>
+<script src='https://stats.wp.com/e-202441.js' defer></script>
 <script>
 	_stq = window._stq || [];
 	_stq.push([ 'view', {v:'ext',j:'1:9.9.2',blog:'181888282',post:'0',tz:'0',srv:'jessicadivers.com'} ]);

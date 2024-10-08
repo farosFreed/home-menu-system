@@ -1,14 +1,14 @@
-import requests
-import os 
-import urllib
-
+import requests # for HTTP requests
+import os # for file operations
+import urllib # for URL encoding
+import sys # for command line arguments 
 
 # STEP #0: Variables & Functions
 
 ## VARS
 blacklist = 'menu-list.txt'
 
-## METHODS
+## HELPER METHODS
 # Save the response to a file
 # TODO python method documention 
 def write_response(response, folder_name='raw_html'):
@@ -34,38 +34,58 @@ def write_response(response, folder_name='raw_html'):
         fh.write(response.url + '\n')
 
 
-## TODO parametrize the URL
-url = "https://tasty.co/recipe/instant-pot-french-dip-sandwich"
-
 # STEP #1: Scrape the website & save the HTML
-all_links = []
-try:
-    with open(blacklist) as fh:
-        all_links = fh.read().split('\n')
-except FileNotFoundError:
-    print("menu-list.txt file not found.")
+def scrape_site(url):
     all_links = []
+    try:
+        with open(blacklist) as fh:
+            all_links = fh.read().split('\n')
+    except FileNotFoundError:
+        print("menu-list.txt file not found.")
+        all_links = []
 
-print(all_links)
+    print(all_links)
 
-# check all_links for url to prevent re-scraping
-if url in all_links:
-     print("URL already scraped, aborting ...")
-     exit() # TODO exit the script? or just jump to step 2?
-else:
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        print(response.text)
-
-        # save the HTML for later analysis
-        write_response(response)
-
+    # check all_links for url to prevent re-scraping
+    if url in all_links:
+        print("URL already scraped, aborting ...")
+        exit() # TODO exit the script? or just jump to step 2?
     else:
-        print("Failed to retrieve the website")
+        # Headers to mimic browser
+        headers = {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept-Encoding': 'gzip, deflate, br, zstd',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Referer': 'https://www.google.com',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+        }
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            print(response.text)
+
+            # save the HTML for later analysis
+            write_response(response)
+
+        else:
+            print("Failed to retrieve the website")
+            print(f"Error: {response.status_code}")
 
 
 
 # STEP #2 Analyze the saved HTML
-# with open('path/to/saving.html', 'rb') as f:
-#     soup = BeautifulSoup(f.read(), 'lxml')
+def analyze_html(): 
+    print('do something')
+    # with open('path/to/saving.html', 'rb') as f:
+    #     soup = BeautifulSoup(f.read(), 'lxml')
+
+
+
+
+# START MAIN FUNCTION
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+        scrape_site(url)
+    else:
+        print("Please provide a url.")

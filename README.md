@@ -15,4 +15,8 @@ What are some ideas we can use for this? Maybe we can paste HTML from many sites
 
 ### Project Log
 
--[X] save raw output somewhere we can reuse -[X] save successfully scrape urls to blacklist / recipe list file -[ ] parameterize URL in scrape.py -[ ] document method better including param definitions and return output -[ ] analyze 4-5 scraped outputs and look for
+- [x] save raw output somewhere we can reuse
+- [x] save successfully scrape urls to blacklist / recipe list file
+- [x] parameterize URL in scrape.py
+- [ ] analyze 4-5 scraped outputs and look for patterns
+- [ ] (STRETCH GOAL) notice youtube links and save video instead? or can we scrape reliably from video description?
