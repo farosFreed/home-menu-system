@@ -18,5 +18,10 @@ What are some ideas we can use for this? Maybe we can paste HTML from many sites
 - [x] save raw output somewhere we can reuse
 - [x] save successfully scrape urls to blacklist / recipe list file
 - [x] parameterize URL in scrape.py
-- [ ] analyze 4-5 scraped outputs and look for patterns
+- [x] use URL to lookup raw output file, use beautifulSoup to get title
+- [x] ingredient list if possible (look for 'ingredient' then `<li>`?)
+- [x] output to JSON?
+- [ ] use JSON to generate webpage (look at NUXT CONTENT for this https://content.nuxt.com/) https://github.com/nuxt/content
+- [ ] use AI to analyze scraped output for recipes details and find patterns?
 - [ ] (STRETCH GOAL) notice youtube links and save video instead? or can we scrape reliably from video description?
+- [ ] (STRETCH GOAL) scrape instragram posts, they return garbled output or output in a diff format https://scrapfly.io/blog/how-to-scrape-instagram/
