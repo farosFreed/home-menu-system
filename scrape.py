@@ -115,7 +115,7 @@ def save_json(data, title):
     # make title safe for filename
     filename = title.replace(' ', '_') + '.json'
     # filename = urllib.parse.quote(title, '') + '.json'
-    with open('json/' + filename, 'w') as f: #encoding='latin-1'
+    with open('content/' + filename, 'w') as f: #encoding='latin-1'
         json.dump(data, f, indent=8, ensure_ascii=False)
     print("Created Json File")
 
