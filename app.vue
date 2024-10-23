@@ -1,9 +1,4 @@
-<script lang="ts" setup>
-// Create a query looking for anything in content/ directory
-
-const items = await queryContent().find();
-</script>
-
+<script lang="ts" setup></script>
 <template>
   <div>
     <NuxtRouteAnnouncer />
