@@ -31,10 +31,10 @@ Can we use this project to learn more elastic search?
 - [x] generate individual recipe pages with nuxt content
 - [x] use components to display data nicely
 - [x] explore solutions to download images - start here https://cloudinary.com/guides/web-performance/downloading-image-from-url-in-python-5-ways-with-code-examples, if the image already exists, don't re-download it.
-- [ ] implement a search, searchContent? https://content.nuxt.com/composables/search-content use elastic search?
+- [x] implement a search, searchContent? https://content.nuxt.com/composables/search-content use elastic search?
+- [ ] batch small improvements: add TAGS, standardize data (strip out '[]' characters etc) and add hover styles, nicer styles
 - [ ] user test on yourself, launch project on your site as subdomain ? get a device and display
 - [ ] plan continuous deployment, does your host have github integration?
-- [ ] (STRETCH GOAL) standardize data (strip out '[]' characters etc) and add nicer styles, always nicer styles
 - [ ] (STRETCH GOAL) use AI to analyze scraped output for recipes details and find patterns?
 - [ ] (STRETCH GOAL) notice youtube links and save video instead? or can we scrape reliably from video description?
 

@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/content"],
   content: {
-    // config options for Nuxt Content here
+    experimental: {
+      search: { indexed: true },
+    },
   },
 });

@@ -1,11 +1,37 @@
 <script lang="ts" setup>
+// import searchContent from
 // Create a query looking for anything in content/ directory
 const { data } = await useAsyncData("home", () => queryContent().find());
+// Search the data
+const miniSearchOptions = defineMiniSearchOptions({
+  fields: ["title"],
+});
+const search = ref("");
+const results = ref([]);
+// TODO test is this still needed?
+const handleSearch = async () => {
+  const newResults = await searchContent(search);
+  console.log(newResults);
+  console.log(data);
+  results.value = newResults.length > 0 ? newResults : data;
+};
 </script>
 <template>
   <main>
     <h1>Cafe de Oleson Menu</h1>
-    <MenuItemPreview v-if="data" :items="data" />
+    <input v-model="search" />
+    <button @click="handleSearch">search</button>
+    <ContentList :query="{ where: { title: { $regex: `/${search}/ig` } } }">
+      <template #default="{ list }">
+        <MenuItemPreview :items="list" />
+      </template>
+      <template #not-found>
+        <p v-if="search.length > 0">
+          Nothing found for '{{ search }}'. Browse recipes below:
+        </p>
+        <MenuItemPreview v-if="data" :items="data" />
+      </template>
+    </ContentList>
   </main>
 </template>
 <style lang="scss" scoped>
