@@ -77,17 +77,23 @@ def analyze_html(url):
     with open(path, 'rb') as f:
         soup = BeautifulSoup(f.read(), 'lxml') # TODO add 'html.parser' for instagram content?
 
-        # Title
+        ## Title ##
         title = soup.select('html head title')
-        # Ingredients
+
+        ## Ingredients ##
         # Find all <li> elements with a class containing "ingredient"
         ingredient_regex = re.compile(".*ingredient.*")
         li_elements = soup.find_all('li', {"class":ingredient_regex})
         ingredients = []
         for li in li_elements:
             print(li.text)
-            ingredients.append(li.text)
-        # Instructions
+            #remove ▢ character from start of string if it exists
+            if li.text.startswith('▢'):
+                ingredients.append(li.text[1:])
+            else:
+                ingredients.append(li.text)
+
+        ## Instructions ##
         instruction_regex = re.compile(".*instruction.*")
         li_elements_2 = soup.find_all('li', {"class":instruction_regex})
         instructions = []
@@ -105,7 +111,8 @@ def analyze_html(url):
                 for li in el.find_all('li'):
                     print(li.text)
                     instructions.append(li.text)
-        # Image
+
+        ## Image ##
         # look for first string starting with 'https://' and ending with '.jpg', inside a meta tag og:image
         image_regex = re.compile("https://.*\.jpg")
         image_url = soup.find('meta', {'property':'og:image'})['content']

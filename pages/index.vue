@@ -8,19 +8,11 @@ const miniSearchOptions = defineMiniSearchOptions({
 });
 const search = ref("");
 const results = ref([]);
-// TODO test is this still needed?
-const handleSearch = async () => {
-  const newResults = await searchContent(search);
-  console.log(newResults);
-  console.log(data);
-  results.value = newResults.length > 0 ? newResults : data;
-};
 </script>
 <template>
   <main>
     <h1>Cafe de Oleson Menu</h1>
-    <input v-model="search" />
-    <button @click="handleSearch">search</button>
+    <input v-model="search" placeholder="search" />
     <ContentList :query="{ where: { title: { $regex: `/${search}/ig` } } }">
       <template #default="{ list }">
         <MenuItemPreview :items="list" />

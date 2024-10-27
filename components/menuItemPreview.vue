@@ -32,6 +32,7 @@ const handleClick = async (item_path: string) => {
 <style lang="scss" scoped>
 $radius: 1rem;
 $spacer: 1rem;
+$lightblue: #d4e7f9;
 ul.menu-item {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -43,6 +44,9 @@ ul.menu-item {
     margin-top: $spacer;
     padding: $spacer;
     cursor: pointer;
+    &:hover {
+      background-color: $lightblue;
+    }
     .preview-image {
       width: 100%;
       height: 20vh;
