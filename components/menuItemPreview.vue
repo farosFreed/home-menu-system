@@ -19,8 +19,9 @@ const handleClick = async (item_path: string) => {
 };
 </script>
 <template>
-  <ul>
+  <ul class="menu-item">
     <li v-for="item in items" :key="item.url" @click="handleClick(item._path)">
+      <img class="preview-image" :src="item.image" :alt="item.title" />
       <h3>
         <NuxtLink :to="item._path">{{ item.title }}</NuxtLink>
       </h3>
@@ -31,20 +32,36 @@ const handleClick = async (item_path: string) => {
 <style lang="scss" scoped>
 $radius: 1rem;
 $spacer: 1rem;
-
-li {
-  list-style-type: none;
-  border: 1px solid #ccc;
-  border-radius: $radius;
-  margin-top: $spacer;
-  padding: $spacer;
-  cursor: pointer;
-  .preview {
-    display: -webkit-box;
-    line-clamp: 2;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+ul.menu-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: $spacer;
+  li {
+    list-style-type: none;
+    border: 1px solid #ccc;
+    border-radius: $radius;
+    margin-top: $spacer;
+    padding: $spacer;
+    cursor: pointer;
+    .preview-image {
+      width: 100%;
+      height: 20vh;
+      object-fit: cover;
+      border-radius: $radius;
+    }
+    .preview {
+      display: -webkit-box;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 540px) {
+    grid-template-columns: 1fr;
   }
 }
 </style>

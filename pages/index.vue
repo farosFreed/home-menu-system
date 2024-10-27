@@ -12,6 +12,6 @@ const { data } = await useAsyncData("home", () => queryContent().find());
 main {
   margin: 0 auto;
   text-align: center;
-  max-width: 600px;
+  padding: 1rem;
 }
 </style>
