@@ -1,6 +1,7 @@
 import requests # for HTTP requests
 import os # for file operations
 import urllib # for URL encoding
+import urllib.request # for downloading images
 import sys # for command line arguments 
 from bs4 import BeautifulSoup # for HTML parsing
 import json # write to JSON file
@@ -104,9 +105,27 @@ def analyze_html(url):
                 for li in el.find_all('li'):
                     print(li.text)
                     instructions.append(li.text)
+        # Image
+        # look for first string starting with 'https://' and ending with '.jpg', inside a meta tag og:image
+        image_regex = re.compile("https://.*\.jpg")
+        image_url = soup.find('meta', {'property':'og:image'})['content']
+        print("imageurl" + image_url)
+        image_filename = filename.replace('%', '').replace('.','') #create a safe filename
+        save_as = 'images/' + image_filename + '.jpg'
+        save_as_path = os.path.join(current_file_directory, 'public', save_as)
+        # if file does not exist, download it
+        if not os.path.exists(save_as_path):
+            # add browser headers to request image download
+            opener = urllib.request.build_opener()
+            opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36')]
+            urllib.request.install_opener(opener)
+            urllib.request.urlretrieve(image_url, save_as_path)
+            print("Image downloaded.")
+        else:
+            print("Image already exists.")
 
          # Create a dictionary with the above book information
-        data = { 'url': url, 'title': title[0].text, 'ingredients': ingredients, 'instructions': instructions }
+        data = { 'url': url, 'title': title[0].text, 'ingredients': ingredients, 'instructions': instructions, 'image':save_as }
         save_json(data, title[0].text)
 
 
