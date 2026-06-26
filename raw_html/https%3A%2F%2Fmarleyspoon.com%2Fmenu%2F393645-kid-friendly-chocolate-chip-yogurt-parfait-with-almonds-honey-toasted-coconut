@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <script type="text/javascript">
+      window.enabledFeatures = {"fruitbox":false,"checkout_flow":true,"ref_order_groups":false,"ref_order_percent":false,"ref_order_actors":false,"findability":true,"is_market_discounted_pricing_enabled":true,"is_revamped_recipe_tile":false}
+    </script>
+    
+      <!-- OneTrust Cookies Consent Notice -->
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="41f976a3-9bcc-422d-ab88-a0065eed55f3"></script>
+  <script type="text/javascript">
+    function OptanonWrapper() {
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: 'OnetrustGroupsUpdated', funnelType: 'web_legacy_funnel'});
+    }
+  </script>
+  <!-- OneTrust Cookies Consent Notice -->
+
+  <script>
+    if (typeof dataLayer === 'undefined') {
+      dataLayer = [];
+    }
+  </script>
+  <style>.async-hide { opacity: 0 !important} </style>
+  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+  h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+  (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+  })(window,document.documentElement,'async-hide','dataLayer',4000,
+  {'GTM-K58QLV':true});</script>
+
+<script type="text/plain" class="optanon-category-C0002">
+  LUX=(function(){var a=("undefined"!==typeof(LUX)&&"undefined"!==typeof(LUX.gaMarks)?LUX.gaMarks:[]);var d=("undefined"!==typeof(LUX)&&"undefined"!==typeof(LUX.gaMeasures)?LUX.gaMeasures:[]);var j="LUX_start";var k=window.performance;var l=("undefined"!==typeof(LUX)&&LUX.ns?LUX.ns:(Date.now?Date.now():+(new Date())));if(k&&k.timing&&k.timing.navigationStart){l=k.timing.navigationStart}function f(){if(k&&k.now){return k.now()}var o=Date.now?Date.now():+(new Date());return o-l}function b(n){if(k){if(k.mark){return k.mark(n)}else{if(k.webkitMark){return k.webkitMark(n)}}}a.push({name:n,entryType:"mark",startTime:f(),duration:0});return}function m(p,t,n){if("undefined"===typeof(t)&&h(j)){t=j}if(k){if(k.measure){if(t){if(n){return k.measure(p,t,n)}else{return k.measure(p,t)}}else{return k.measure(p)}}else{if(k.webkitMeasure){return k.webkitMeasure(p,t,n)}}}var r=0,o=f();if(t){var s=h(t);if(s){r=s.startTime}else{if(k&&k.timing&&k.timing[t]){r=k.timing[t]-k.timing.navigationStart}else{return}}}if(n){var q=h(n);if(q){o=q.startTime}else{if(k&&k.timing&&k.timing[n]){o=k.timing[n]-k.timing.navigationStart}else{return}}}d.push({name:p,entryType:"measure",startTime:r,duration:(o-r)});return}function h(n){return c(n,g())}function c(p,o){for(i=o.length-1;i>=0;i--){var n=o[i];if(p===n.name){return n}}return undefined}function g(){if(k){if(k.getEntriesByType){return k.getEntriesByType("mark")}else{if(k.webkitGetEntriesByType){return k.webkitGetEntriesByType("mark")}}}return a}return{mark:b,measure:m,gaMarks:a,gaMeasures:d}})();LUX.ns=(Date.now?Date.now():+(new Date()));LUX.ac=[];LUX.cmd=function(a){LUX.ac.push(a)};LUX.init=function(){LUX.cmd(["init"])};LUX.send=function(){LUX.cmd(["send"])};LUX.addData=function(a,b){LUX.cmd(["addData",a,b])};LUX_ae=[];window.addEventListener("error",function(a){LUX_ae.push(a)});LUX_al=[];if("function"===typeof(PerformanceObserver)){var LongTaskObserver=new PerformanceObserver(function(c){var b=c.getEntries();for(var a=0;a<b.length;a++){var d=b[a];LUX_al.push(d)}});try{LongTaskObserver.observe({entryTypes:["longtask"],buffered:true})}catch(e){}};
+
+  // Sample rate based on 3million monthly unique visits for MS
+  LUX.samplerate = 70;
+  LUX.label = "menu_show";
+</script>
+
+    <script type="text/plain" class="optanon-category-C0002" src="https://cdn.speedcurve.com/js/lux.js?id=86718113" async defer></script>
+
+<script>
+var funnelPages =  ["/select-plan", "/select-location", "/delivery-details", "/payment"];
+
+function isFunnelPage() {
+  return funnelPages.some((el) => window.location.pathname === el);
+}
+
+var chunklist = ["account", "funnel", "home", "menu", "specials", "vendor"];
+
+function checkIgnore (isUncaught, args, payload) {
+  try {
+    if (isFunnelPage()) {
+      return false;
+    } else if (payload.body.trace) {
+      let filename = payload.body.trace.frames[0].filename;
+      let isBlocked = chunklist.every(function (chunk) {
+        return filename.indexOf("javascripts/" + chunk) === -1;
+      })
+      if (isUncaught && isBlocked) {
+        return true;
+      }
+    } else if (payload.body.message) {
+      return false;
+    } else {
+      return true;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return false;
+}
+
+var _rollbarConfig = {
+    accessToken: isFunnelPage() ? "ce7ea2c1e7d5487898b30b0a89eb4c95" : "cd5a920cf5304a70abfae877ff16281e",
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+    checkIgnore: checkIgnore,
+    verbose: false,
+    enabled: true,
+    hostSafeList: ["marleyspoon.com"],
+    payload: {
+        environment: "production",
+        context: window.location.pathname,
+        user:  {"country":"us","brand":"ms"},
+        client: {
+          javascript: {
+            source_map_enabled: true,
+            code_version: "9dbd77c108f317838753f72b24f7bad0a8270dcb",
+            guess_uncaught_frames: true
+          }
+        }
+    }
+};
+
+// Rollbar Snippet
+!function(r){function e(n){if(o[n])return o[n].exports;var t=o[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,e),t.loaded=!0,t.exports}var o={};return e.m=r,e.c=o,e.p="",e(0)}([function(r,e,o){"use strict";var n=o(1),t=o(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"/ajax/libs/rollbar.js/2.4.6/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,e,o){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,e){this.options=r,this._rollbarOldOnError=null;var o=s++;this.shimId=function(){return o},"undefined"!=typeof window&&window._rollbarShims&&(window._rollbarShims[o]={handler:e,messages:[]})}function a(r,e){if(r){var o=e.globalAlias||"Rollbar";if("object"==typeof r[o])return r[o];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(e);return n(function(){e.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),e.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=e.autoInstrument;return e.enabled!==!1&&(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[o]=t,t})()}}function l(r){return n(function(){var e=this,o=Array.prototype.slice.call(arguments,0),n={shim:e,method:r,args:o,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=o(2),s=0,d=o(3),c=function(r,e){return new t(r,e)},p=function(r){return new d(c,r)};t.prototype.loadFull=function(r,e,o,t,a){var l=function(){var e;if(void 0===r._rollbarDidLoad){e=new Error("rollbar.js did not load");for(var o,n,t,l,i=0;o=r._rollbarShims[i++];)for(o=o.messages||[];n=o.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(e);break}}"function"==typeof a&&a(e)},i=!1,s=e.createElement("script"),d=e.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,o||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,e,o){try{var n;if(n="function"==typeof e?e:function(){return e||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){o&&"function"==typeof o&&o.apply(this,arguments);try{return r.apply(this,arguments)}catch(o){var e=o;throw e&&("string"==typeof e&&(e=new String(e)),e._rollbarContext=n()||{},e._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=e),e}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(e){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureEvent,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,e){"use strict";function o(r,e,o){if(r){var t;if("function"==typeof e._rollbarOldOnError)t=e._rollbarOldOnError;else if(r.onerror){for(t=r.onerror;t._rollbarOldOnError;)t=t._rollbarOldOnError;e._rollbarOldOnError=t}var a=function(){var o=Array.prototype.slice.call(arguments,0);n(r,e,t,o)};o&&(a._rollbarOldOnError=t),r.onerror=a}}function n(r,e,o,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),e.handleUncaughtException.apply(e,n),o&&o.apply(r,n)}function t(r,e,o){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var o,n,t;try{o=r.reason}catch(r){o=void 0}try{n=r.promise}catch(r){n="[unhandledrejection] error getting `promise` from event"}try{t=r.detail,!o&&t&&(o=t.reason,n=t.promise)}catch(r){t="[unhandledrejection] error getting `detail` from event"}o||(o="[unhandledrejection] error getting `reason` from event"),e&&e.handleUnhandledRejection&&e.handleUnhandledRejection(o,n)};n.belongsToShim=o,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,e,o){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(e,r[t].prototype,o)}}function l(r,e,o){if(e.hasOwnProperty&&e.hasOwnProperty("addEventListener")){for(var n=e.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(e,o,t){n.call(this,e,r.wrap(o),t)};t._rollbarOldAdd=n,t.belongsToShim=o,e.addEventListener=t;for(var a=e.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,e,o){a.call(this,r,e&&e._rollbar_wrapped||e,o)};l._rollbarOldRemove=a,l.belongsToShim=o,e.removeEventListener=l}}r.exports={captureUncaughtExceptions:o,captureUnhandledRejections:t,wrapGlobals:a}},function(r,e){"use strict";function o(r,e){this.impl=r(e,this),this.options=e,n(o.prototype)}function n(r){for(var e=function(r){return function(){var e=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,e)}},o="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureEvent,captureDomContentLoaded,captureLoad".split(","),n=0;n<o.length;n++)r[o[n]]=e(o[n])}o.prototype._swapAndProcessMessages=function(r,e){this.impl=r(this.options);for(var o,n,t;o=e.shift();)n=o.method,t=o.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],o.ts]):this[n].apply(this,t));return this},r.exports=o},function(r,e){"use strict";r.exports=function(r){return function(e){if(!e&&!window._rollbarInitialized){r=r||{};for(var o,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;o=window._rollbarShims[i++];)n||(n=o.handler),o.handler._swapAndProcessMessages(l,o.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+// End Rollbar Snippet
+</script>
+
+<script>
+var startOffset = Date.now ? Date.now() : +(new Date())
+var performance = window.performance || {}
+var _entries = []
+var _marksIndex = {}
+
+var _filterEntries = function (key, value) {
+  var i = 0
+  var n = _entries.length
+  var result = []
+
+  for (; i < n; i++) {
+    if (_entries[i][key] === value) {
+      result.push(_entries[i])
+    }
+  }
+  return result
+}
+
+var _clearEntries = function (type, name) {
+  var i = _entries.length
+  var entry
+
+  while (i--) {
+    entry = _entries[i]
+    if (entry.entryType == type && (name === void 0 || entry.name == name)) {
+      _entries.splice(i, 1)
+    }
+  }
+}
+
+if (!performance.now) {
+  performance.now = performance.webkitNow || performance.mozNow || performance.msNow || function () {
+    return (Date.now ? Date.now() : +(new Date)) - startOffset
+  }
+}
+
+if (!performance.mark) {
+  performance.mark = performance.webkitMark || function (name) {
+    var mark = {
+      name: name,
+      entryType: 'mark',
+      startTime: performance.now(),
+      duration: 0
+    }
+    _entries.push(mark)
+    _marksIndex[name] = mark
+  }
+}
+
+if (!performance.measure) {
+  performance.measure = performance.webkitMeasure || function (name, startMark, endMark) {
+    startMark = _marksIndex[startMark].startTime
+    endMark = _marksIndex[endMark].startTime
+
+    _entries.push({
+      name: name,
+      entryType: 'measure',
+      startTime: startMark,
+      duration: endMark - startMark
+    })
+  }
+}
+
+if (!performance.getEntriesByType) {
+  performance.getEntriesByType = performance.webkitGetEntriesByType || function (type) {
+    return _filterEntries('entryType', type)
+  }
+}
+
+if (!performance.getEntriesByName) {
+  performance.getEntriesByName = performance.webkitGetEntriesByName || function (name) {
+    return _filterEntries('name', name)
+  }
+}
+
+if (!performance.clearMarks) {
+  performance.clearMarks = performance.webkitClearMarks || function (name) {
+    _clearEntries('mark', name)
+  }
+}
+
+if (!performance.clearMeasures) {
+  performance.clearMeasures = performance.webkitClearMeasures || function (name) {
+    _clearEntries('measure', name)
+  }
+}
+</script>
+
+  <script>
+    if (typeof dataLayer === 'undefined') {
+      dataLayer = [];
+    }
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-K58QLV');</script>
+  <!-- End Google Tag Manager -->
+
+<!-- Add Ixopay lib to places were a credit card and braintree can be used -->
+
+<!-- Add Stripe lib to places were a credit card can be used -->
+
+<!-- TrustBox script -->
+<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+<!-- End TrustBox script -->
+
+  <script type="text/javascript" defer>
+    window.iterable_token = "1e4fa81b32f84b97a7294448d3947ef9";
+
+    (function () {
+        var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
+        b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'js.iterable.com/analytics.js';
+        var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
+    })();
+  </script>
+
+
+  <script defer type="text/plain" class="optanon-category-C0003">
+  // This script detects outdated browsers and shows a warning message.
+  // See https://browser-update.org/ for details
+
+  // modify this object below {e:-4,f:-3,o:-3,s:-2,c:-3} to change target browsers
+  var $buoop = {
+    required:{e:-4,f:-4,o:-3,s:-2,c:-4}
+  };
+  function $buo_f(){
+  var e = document.createElement("script");
+  e.src = "//browser-update.org/update.min.js";
+  document.body.appendChild(e);
+  };
+  // Due to Optanon, we need to run the Browser Update function "manually"
+  // Attaching event handler won't work because they already fired
+  $buo_f();
+</script>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="locale" content="en-US">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>What&#39;s On The Menu This Week?｜Marley Spoon</title>
+<meta name="description" content="Our weekly menu features everything from delicious vegetarian recipes to meat &amp; fish, family-friendly and fast options. Save your Marley Spoon recipe cards to easily repeat your favorite meals.">
+<meta name="keywords" content="marley spoon menu, marleyspoon menu, meal box menu, recipe kit menu, foodbox menu, food subscriptionmenu, meal kit menu">
+
+
+
+
+
+<link rel="icon" type="image/png" href="/images/ms/favicon/favicon-96x96.png" />
+
+<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+<link rel="apple-touch-icon-precomposed" href="/images/ms/favicon/apple-touch-icon-precomposed.png">
+<!-- For the iPad mini and the first- and second-generation iPad on iOS ≤ 6: -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ms/favicon/apple-touch-72x72-precomposed.png">
+<!-- For the iPad mini and the first- and second-generation iPad on iOS ≥ 7: -->
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/images/ms/favicon/apple-touch-76x76-precomposed.png">
+<!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ms/favicon/apple-touch-114x114-precomposed.png">
+<!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/images/ms/favicon/apple-touch-120x120-precomposed.png">
+<!-- For iPad with high-resolution Retina display running iOS ≤ 6: -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ms/favicon/apple-touch-144x144-precomposed.png">
+<!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/images/ms/favicon/apple-touch-152x152-precomposed.png">
+
+
+<link rel='stylesheet' href='/stylesheets/ms-zurb-ca5899096a.css'>
+<link href="/stylesheets/shared-404131097f.css" media="all" rel="stylesheet" />
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="OmBHyyiQf8gcYBRGw85x60G2/7p+UA/oBSPvexMOl0U=" name="csrf-token" />
+    <meta property="og:description" content="Kid-Friendly! Chocolate Chip Yogurt Parfait">
+  <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/images-marleyspoon-production/media/recipes/393645/main_photos/large/yogurt_parfait-495419957732bf145758228061570f93.jpeg">
+
+
+<meta property="og:title" content="What&#39;s On The Menu This Week?｜Marley Spoon">
+<meta property="fb:app_id" content="1483759665175762">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Marley Spoon">
+<meta property="og:url" content="https://marleyspoon.com/menu/393645-kid-friendly-chocolate-chip-yogurt-parfait-with-almonds-honey-toasted-coconut">
+
+<script type="text/javascript">
+//<![CDATA[
+window.gon={};gon.current_brand="ms";gon.current_brand_name="Marley Spoon";gon.current_country="us";gon.current_currency="USD";gon.env="production";gon.api_token="eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtcyIsImNvdW50cnkiOiJ1cyIsImJyYW5kIjoibXMiLCJ0cyI6MTczMTEyMDY4NiwicmFuZG9tX2lkIjoiZDRlZWRiIn0.YA_SVNorIaqlOg8GYsMxKf4cUtyhi-O6ulFOefkpEo0";gon.api_host="https:\/\/api.marleyspoon.com";gon.git_revision="9dbd77c108f317838753f72b24f7bad0a8270dcb";gon.recipes_preview_enabled=false;gon.callback={"is_enabled":true,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJsZXlzcG9vbiIsImV4cCI6MTAwMDAwMDAwMDAwMDAsInF1ZXVlcyI6eyJkZSI6eyJpZCI6ImJmNDBiNzMxOWM3NTRjYTFhNWQ2MjNlMjFiMDU3ODFjIiwicGhvbmUiOjQ5MzAyMDg0ODA1MTAsImVuZ2xpc2hRdWV1ZU5hbWUiOiJlbi1kZSJ9LCJubCI6eyJpZCI6IjZkNjUzNTc3Y2Y0ZDRjZDQ5NWRjNzczYWM4ODlmNWJkIiwicGhvbmUiOjMxMzA4MDgwNDUyLCJlbmdsaXNoUXVldWVOYW1lIjoiZW4tbmwifSwiYXQiOnsiaWQiOiI2ZjQ1Njk5ZGQ5Njk0MjM5ODA3M2Y0ZGY0NjQyYzQyOCIsInBob25lIjo0MzcyMDgyODA1OCwic21zUGhvbmUiOjQ5MzAyMDg0ODA1MTAsImVuZ2xpc2hRdWV1ZU5hbWUiOiJlbi1hdCJ9LCJiZSI6eyJpZCI6IjY3MzAzNGM0N2UyNDQyYTM4ZjYzMzI2YjQ0M2NiMDdmIiwicGhvbmUiOjMyNzg0ODA3OTgsImVuZ2xpc2hRdWV1ZU5hbWUiOiJlbi1iZSJ9LCJkayI6eyJpZCI6IjMwMmI5ZmQ5ZTk5OTQ0NjI5N2Q5ZjI1ZDVhMjUyN2Y5IiwicGhvbmUiOjQ1ODk4ODgwMDMsImVuZ2xpc2hRdWV1ZU5hbWUiOiJlbi1kayJ9LCJzZSI6eyJpZCI6ImRmMGUwNGFlMTFjMTRlNzQ4MTM5OTM3YzUwMGRmYzczIiwicGhvbmUiOjQ2ODQ0Njg4MjQyLCJlbmdsaXNoUXVldWVOYW1lIjoiZW4tc2UifSwidXMiOnsiaWQiOiJjNDQ0ZDYzZGJlYWQ0ZjA0OGVhY2Y5OTBiZjUyMDE2ZCIsInBob25lIjoxODY2MjI4NDUxMywic21zUGhvbmUiOjE4ODgyNjcyODUwfSwiYXUiOnsiaWQiOiJiMmI2MmVjZmRiZTA0ZGY5OTY3NWQyZjRlMjcyOTIwZSIsInBob25lIjo2MTI2MTQ1MjkxMH0sImVuLWRlIjp7ImlkIjoiYzZiNzFlNzA2ZGVmNGY3MWJjMjk5NjkxMWFmNjU1N2QiLCJwaG9uZSI6NDkzMDIwODQ4MDUxMH0sImVuLWF0Ijp7ImlkIjoiNmY0NTY5OWRkOTY5NDIzOTgwNzNmNGRmNDY0MmM0MjgiLCJwaG9uZSI6NDM3MjA4MjgwNTh9LCJlbi1ubCI6eyJpZCI6IjI2YzQwMDVhY2I1ZTQxNTU5NTM2M2UzODliNWQwMGZkIiwicGhvbmUiOjMxMzA4MDgwNDUyfSwiZW4tYmUiOnsiaWQiOiJiMjI1Y2UyMjQxMDU0N2RhYjNjYTUwNjBjN2I2M2QzOSIsInBob25lIjozMjc4NDgwNzk4fSwiZW4tZGsiOnsiaWQiOiI1OGMyNGY2Y2EwZWQ0NTU5YjE3MjhiMTMzMjEwOWM5NSIsInBob25lIjo0NTg5ODg4MDAzfSwiZW4tc2UiOnsiaWQiOiI5YmNjNmU5MzI5YWY0NDAzOWUwYzcyNDRjYjU2ZmFjZSIsInBob25lIjo0Njg0NDY4ODI0Mn19fQ.Kxm3B9nfbcN9Ofel5BU9c2zjmKdZShh_RxcVCztpEas"};gon.self_service_complaints_gql_url="https:\/\/beef.marleyspoon.com\/steak\/graphql";gon.qualtrics={"order_satisfaction_survey":{"url":"https:\/\/marleyspoon.eu.qualtrics.com\/jfe\/form\/SV_3ENjTr6XALXNcR7"}};gon.iterable={"api_key":"d751d7b928514d4fa2224f54fa102b0c","package_name":"todo","auth_token":""};
+//]]>
+</script>
+
+<script src="/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script defer src="/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script defer src="/ajax/libs/msAnalytics/analytics.min.js"></script>
+<script defer src="/ajax/libs/msABTesting/abTesting.min.js"></script>
+
+<script defer src=/javascripts/manifest-74c2b1499cc529f1d3dd.js></script>
+<script defer src=/javascripts/vendor-c4fa1b8c6a401bdeb21f.js></script>
+<script defer src=/javascripts/commons-f1759c961718ec158d2d.js></script>
+<script defer src=/javascripts/locales/en-US-87929beac3.js></script>
+<script defer src=/javascripts/menu-59a18ce2aecae32e4156.js></script>
+
+
+
+
+
+  </head>
+
+  <body class="menu show">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K58QLV"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+    <!-- display admin bar notice only in accounts area -->
+    
+
+    <div class="page_header" id="page_header">
+      <meta
+  name="apple-itunes-app"
+  content="app-id=1088840761, app-argument=https://app.adjust.com/ybxlef">
+
+<script>
+
+  const bannerType = (function () {
+    const maxTouchPoints = window.navigator.maxTouchPoints
+
+    const userAgent = window.navigator.userAgent
+    if (/(MarleySpoonAndroid|MarleySpoonIOS|DinnerlyIOS|WebView)/i.test(userAgent)) {
+      return null
+    } else if (/Android/i.test(userAgent)) {
+      return 'android'
+    } else if ((!window.MSStream && !/X11|Linux/i.test(userAgent) && maxTouchPoints && maxTouchPoints > 0) || /iPhone|iPad|iPod/i.test(userAgent)) {
+      const isSafari = /Version\/[\d\.]+.*Safari/i.test(userAgent) && !/CriOS/.test(userAgent)
+      if (isSafari) {
+        // for safari, we're going to rely on the native banner
+        return null
+      }
+      return 'ios'
+    }
+
+    return null
+  })();
+
+
+  jQuery(($) => {
+
+    let appUrl = ''
+
+    switch (bannerType) {
+      case 'android':
+        appUrl = "https://yy6f.adj.st?adj_t=8fq6i4f&amp;adj_redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marleyspoon"
+        break
+      case 'ios':
+        appUrl = "https://yy6f.adj.st?adj_t=8fq6i4f&amp;adj_redirect=https%3A%2F%2Fapps.apple.com%2Fapp%2Fid1088840761"
+        break
+      default:
+        return
+    }
+
+    const bannerProp = 'app_download_banner_hidden'
+
+    const rawBannerState = localStorage.getItem(bannerProp)
+    let bannerState = {
+      lastHiddenAt: 0,
+      hideCount: 0
+    }
+    if (rawBannerState) {
+      try {
+        const parsedState = JSON.parse(rawBannerState) || {}
+        const lastHiddenAt = parseInt(parsedState.lastHiddenAt)
+        const hideCount = parseInt(parsedState.hideCount)
+        if (lastHiddenAt > 0 && hideCount > 0) {
+          bannerState = {
+            lastHiddenAt: lastHiddenAt,
+            hideCount: hideCount,
+          }
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+    const secondsInDay = 60 * 60 * 24
+
+    let showBanner = false
+
+    if (!gon.current_user_id) {
+      showBanner = false
+    } else if (current_brand === 'bm') { 
+      showBanner = false 
+    } else if (
+      // banner never previously shown
+      (bannerState.hideCount === 0)
+      // banner shown once 14 days ago
+      || (bannerState.hideCount === 1 && (Date.now() - bannerState.lastHiddenAt > 14 * secondsInDay))
+      //
+      || (bannerState.hideCount > 1 && (Date.now() - bannerState.lastHiddenAt > 60 * secondsInDay))
+    ) {
+      showBanner = true
+    }
+
+    if (!showBanner) {
+      return
+    }
+
+    const content = `
+<div class="app-download-banner">
+  <a href="javascript:void(0);" class="app-download-banner__exit" data-action="close" ></a>
+  <div class="app-download-banner__icon" style="background-image: url(/images/ms/app_logo.webp);"></div>
+  <div class="app-download-banner__info">
+    <div class="app-download-banner__title">Marley Spoon</div>
+    <div class="app-download-banner__author">Deliciously different recipes</div>
+  </div>
+  <a href="${appUrl}" target="_blank" class="app-download-banner__button" rel="noopener">
+    <span class="app-download-banner__button__label">View</span>
+  </a>
+</div>
+    `
+
+    const $content = $(content)
+
+    $content.on('click', '[data-action]', (ev) => {
+      const action = $(ev.currentTarget).attr('data-action')
+      switch (action) {
+        case 'close':
+          try {
+            localStorage.setItem(bannerProp, JSON.stringify({
+              hideCount: bannerState.hideCount + 1,
+              lastHiddenAt: Date.now(),
+            }))
+          } catch (e) {/*ignore*/
+          }
+
+          $content.remove()
+          break
+      }
+    })
+
+    $('#page_header').prepend($content)
+  })
+</script>
+
+          <div class="ms-header nui__center" role="banner">
+  <div class="nui__wrapper">
+    <div class="nui__mobile-menu hide-desktop hide">
+      <div class="menu-container">
+        <div>
+          <a href="#" class="menu-btn close-menu-btn mt1 db" title="Close menu">
+            <span class="svg-header--close-menu"></span>
+          </a>
+
+          <div class="menu-welcome">
+            <h5>Welcome to</h5>
+            <svg class="svg_logo " viewBox="0 0 160 23" width="130px"><path class="path" d="M15.5388 15.274 13.4763 1.6868H11.952L7.8259 11.4244 3.5879 1.6868H2.0819L0 15.274H2.2487L3.3823 7.1335 6.9142 15.274H8.3265L11.7841 7.0566 12.881 15.274H15.5388ZM30.7623 15.274 24.7405 1.6868H23.8298L17.5841 15.274H19.9072L21.2086 12.2714H26.6362L27.9376 15.274H30.7634 30.7623ZM25.8363 10.4815H21.989L23.8847 6.0747 25.8363 10.4815ZM33.4384 1.6868V15.274H36.0962V9.27C36.6161 9.3659 37.0995 9.4238 37.6388 9.4238L40.9844 15.274H43.9587L40.2966 8.8275C41.6723 8.1733 42.5647 6.9607 42.5647 5.3056 42.5647 4.6704 42.3978 3.9203 42.0814 3.3809 41.2083 1.8985 39.7766 1.6868 38.2341 1.6868H33.4384ZM36.0962 3.5536H37.1931C38.6054 3.5536 39.8509 4.054 39.8509 5.728 39.8509 7.0554 38.8659 8.326 36.3373 8.326H36.0962V3.5536ZM55.1303 15.274V13.3692H49.2194V1.6868H46.5433V15.274H55.1303ZM66.8961 15.274V13.4261H60.5762V9.173H65.4461V7.3062H60.5762V3.5347H66.134V1.6868H57.9184V15.274H66.8961ZM97.1342 4.7472C96.8554 1.9765 94.6809 1.2443 92.7099 1.2443 88.3416 1.2443 87.6537 4.1498 87.6537 5.5163 87.6537 7.8835 89.3825 9.0571 91.8918 9.4806 93.1189 9.6924 94.6432 10.0769 94.6432 11.713 94.6432 12.7718 93.8068 14.0223 91.8552 14.0223 91.205 14.0223 88.9369 13.9064 87.8959 11.3475L87.1714 11.6172C87.3383 13.6378 88.6581 15.6774 92.078 15.6774 95.907 15.6774 97.3753 13.2912 97.3753 11.1736 97.3753 9.2109 96.2418 7.7096 92.8025 7.0365 91.0554 6.6898 90.2932 6.1125 90.2932 4.9969 90.2932 3.2649 92.1146 2.8804 93.1555 2.8804 93.6206 2.8804 95.7025 2.9573 96.371 4.94L97.1331 4.7472H97.1342ZM99.9782 1.6878V15.275H102.636V9.251C103.138 9.309 103.621 9.3859 104.142 9.3859 106.522 9.3859 109.236 8.0964 109.236 5.2677 109.236 3.4009 108.009 1.6878 104.96 1.6878H99.9782ZM102.636 3.5357H103.844C105.033 3.5357 106.465 4.1131 106.465 5.8261 106.465 7.8278 104.327 8.3471 103.045 8.3471H102.636V3.5346 3.5357ZM122.853 8.4374C122.853 4.278 120.502 1.6622 116.73 1.6622 112.73 1.6622 110.66 4.5868 110.66 8.5099 110.66 12.433 112.73 15.2673 116.695 15.2673 121.66 15.2673 122.853 11.0889 122.853 8.4374ZM120.168 8.4374C120.168 10.7802 119.538 13.5598 116.766 13.5598 113.994 13.5598 113.379 10.6175 113.379 8.2736 113.379 6.0758 114.168 3.3686 116.73 3.3686 119.432 3.3686 120.168 6.1114 120.168 8.4363V8.4374ZM137.185 8.4374C137.185 4.278 134.834 1.6622 131.062 1.6622 127.062 1.6622 124.991 4.5868 124.991 8.5099 124.991 12.433 127.062 15.2673 131.027 15.2673 135.992 15.2673 137.185 11.0889 137.185 8.4374ZM134.501 8.4374C134.501 10.7802 133.869 13.5598 131.097 13.5598 128.325 13.5598 127.711 10.6175 127.711 8.2736 127.711 6.0758 128.5 3.3686 131.062 3.3686 133.764 3.3686 134.501 6.1114 134.501 8.4363V8.4374ZM151.115 15.4467V1.6868H148.933V9.932L141.845 1.6868H139.452V15.274H141.652V5.3179L150.414 15.4467H151.115ZM80.1981 1.689 75.608 11.6384 71.8544 1.689H68.991L74.1279 14.9407C74.1279 14.9407 74.1311 15.1146 72.7683 17.2355 71.4787 19.2439 69.7229 20.9837 67.2707 21.2289 64.9703 21.4596 62.516 20.7106 60.7344 19.3609L60.2952 19.9327 60.5342 20.1823C61.9013 21.5376 64.6442 22.7558 67.0145 22.7558 68.7864 22.7558 70.5411 22.1929 72.0126 21.1743 73.496 20.1478 74.5412 18.6777 75.4627 17.1207 75.7415 16.6504 76.0031 16.17 76.2657 15.6886 77.6953 13.0638 82.8107 1.8094 82.8656 1.6879H80.1992L80.1981 1.689ZM153.115 4.7885C153.115 2.8157 154.649 1.2443 156.538 1.2443 158.427 1.2443 159.961 2.8157 159.961 4.7885 159.961 6.7612 158.443 8.3327 156.538 8.3327 154.633 8.3327 153.115 6.7444 153.115 4.7885ZM153.68 4.7885C153.68 6.4101 154.956 7.7475 156.538 7.7475 158.12 7.7475 159.396 6.4101 159.396 4.7885 159.396 3.1668 158.12 1.8294 156.538 1.8294 154.956 1.8294 153.68 3.1334 153.68 4.7885ZM156.441 5.2231H155.811V6.828H155.214V2.7656H156.813C157.571 2.7656 158.137 3.2504 158.137 4.0027 158.137 4.9055 157.362 5.2064 157.135 5.2064L158.185 6.828H157.458L156.441 5.2231ZM155.811 3.2839V4.6882H156.813C157.249 4.6882 157.523 4.4207 157.523 4.0027 157.523 3.5513 157.249 3.2839 156.813 3.2839H155.811Z" fill="#101820" /></svg>
+
+            <div class="hide-tablet mt3">
+              <div class="mb2">
+                Already a member?
+                <strong><a class="nui__login-button" href="/login">Login</a></strong>
+              </div>
+                <a class="nui__signup-button nui__button--primary nui__button full" href="/select-plan">Choose your meal kit</a>
+
+            </div>
+
+          </div>
+          <div class="menu-divider"></div>
+          <nav>
+            <ul class="ml0  menu-items">
+              <li class="tab-title mr3">
+  <a class="nui__menu-menu" href="/menu">View menu</a>
+</li>
+<li class="tab-title mr3">
+  <a class="nui__menu-how" href="/how">How it works</a>
+</li>
+  <li class="tab-title mr3">
+    <a class="nui__menu-martha" href="/martha-stewart">Martha</a>
+  </li>
+
+
+
+<li class="tab-title mr3 dropdown has-submenu">
+  <a href="javascript:void(0)" aria-expanded="false">Sustainability <span class="arrow-icon svg-chevron-down svg-chevron-down-black"></span></a>
+  <ul>
+      <li><a href="https://marleyspoon.com/sustainability/recycle" rel="noopener" target="_blank">Recycling</a></li>
+      <li><a href="/assets/sustainability_report-f8f8e805e45edc5da536300764d0ea0d.pdf" rel="noopener" target="_blank">Sustainability Report</a></li>
+  </ul>
+</li>
+
+<li class="tab-title mr3">
+  <a class="nui__menu-contact" href="https://support.marleyspoon.com/hc/en-us?origin=us" target="_blank">Customer Service</a>
+</li>
+
+            </ul>
+          </nav>
+            <div class="menu-divider"></div>
+            <div class="mobile_apps">
+              <p class="title">Download via</p>
+              <div class="mobile_badges">
+                <a href="https://yy6f.adj.st?adj_t=t56jf4f&amp;adj_redirect=https%3A%2F%2Fapps.apple.com%2Fapp%2Fid1088840761" rel="noopener" target="_blank"><img alt="Appstore" src="/assets/logos/app_store/AppStore-79d633e6e881694bc8784472d83b203f.svg" /></a><a href="https://yy6f.adj.st?adj_t=t56jf4f&amp;adj_redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marleyspoon" rel="noopener" target="_blank"><img alt="Google Play" src="/assets/logos/app_store/GooglePlay-5c9022fbdccfe456be83c1d1fb978492.svg" /></a>
+              </div>
+            </div>
+        </div>
+
+      </div>
+      <div id="mobile-menu-backdrop" class="menu-backdrop"></div>
+    </div>
+    <div class="nui__row nui__nowrap nui__header-menu">
+      <div class="nui__col-2 nui__col-5--tablet nui__col-3--mobile">
+        <div class="mobile-menu-button hide-desktop">
+          <a href="#" class="menu-btn open-menu-btn nui__menu-open">
+            <span style="display: inline-block" class="svg-hamburger-menu"></span>
+          </a>
+        </div>
+        <div class="nui__logo us">
+          <a href="/" class="nui__logo-link">Marley Spoon</a>
+        </div>
+      </div>
+      <div class="desktop-menu nui__menu nui__col-8--desktop hide-mobile hide-tablet">
+        <nav>
+          <ul class="ma0">
+            <li class="tab-title mr3">
+  <a class="nui__menu-menu" href="/menu">View menu</a>
+</li>
+<li class="tab-title mr3">
+  <a class="nui__menu-how" href="/how">How it works</a>
+</li>
+  <li class="tab-title mr3">
+    <a class="nui__menu-martha" href="/martha-stewart">Martha</a>
+  </li>
+
+
+
+<li class="tab-title mr3 dropdown has-submenu">
+  <a href="javascript:void(0)" aria-expanded="false">Sustainability <span class="arrow-icon svg-chevron-down svg-chevron-down-black"></span></a>
+  <ul>
+      <li><a href="https://marleyspoon.com/sustainability/recycle" rel="noopener" target="_blank">Recycling</a></li>
+      <li><a href="/assets/sustainability_report-f8f8e805e45edc5da536300764d0ea0d.pdf" rel="noopener" target="_blank">Sustainability Report</a></li>
+  </ul>
+</li>
+
+<li class="tab-title mr3">
+  <a class="nui__menu-contact" href="https://support.marleyspoon.com/hc/en-us?origin=us" target="_blank">Customer Service</a>
+</li>
+
+          </ul>
+        </nav>
+      </div>
+      <div class="buttons-container nui__right hide-mobile">
+        <a class="nui__login-button" href="/login">Login</a>
+          <a class="nui__signup-button nui__button--primary nui__button" data-webp="true" href="/select-plan">Choose your meal kit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      <div id="failed_payments_banner_wrap"></div>
+
+      <div id="failed_payment_reactivation_banner_wrap"></div>
+
+      <div id="flash_message_container">
+</div>
+
+
+      <div id="update_delivery_instructions_banner_wrap"></div>
+    </div>
+
+    
+
+      <div class="siteWrapper" role="main">
+        
+  
+
+
+
+<div id="dish_detail">
+  <div class="recipe-wrapper-placeholder">
+    <div id="recipe-placeholder" style="min-height:1000px">
+      <div class="recipe-header nui__row" style="background-color: #FFFFFF;">
+        <div class="recipe-image__wrapper nui__row nui__col-12" style="background-color:#E0E1E2">
+          <svg height="100%" viewBox="0 0 180 180" width="100%" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m89.9079251 179.907925c49.6545819 0 89.9076659-40.253084 89.9076659-89.907925 0-49.6548415-40.253084-89.90792507-89.9076659-89.90792507-49.6548415 0-89.9079251 40.25308357-89.9079251 89.90792507 0 49.654841 40.2530836 89.907925 89.9079251 89.907925" fill="#d3d3d3"/><g fill="#fff"><path d="m153.285 118.635v-25.429h-3.984v15.364l-13.656-15.364h-4.482v25.109h4.019v-18.494l16.858 18.814z"/><path d="m47.2227666 84.1933141-3.7037464-23.5574351h-2.7360519l-7.4077522 16.8839481-7.6077233-16.8839481h-2.702853l-3.7372046 23.5574351h4.0375504l2.0355043-14.114438 6.339683 14.114438h2.5360807l6.2063689-14.2480115 1.9685879 14.2480115zm26.6607493 0-10.8111528-23.5574351h-1.6350432l-11.2116138 23.5574351h4.1711239l2.3355907-5.2052161h9.743343l2.3358501 5.2052161zm-8.8425649-8.3085302h-6.9069164l3.4034006-7.6411816zm12.3126225-15.2489049v23.5574351h4.7715562v-10.4106916c.9342363.1667723 1.8018155.2668876 2.7695101.2668876l6.0061383 10.143804h5.3387896l-6.5733717-11.1781556c2.4691642-1.1344669 4.0707492-3.2366282 4.0707492-6.1062536 0-1.101268-.3003458-2.4025072-.8675792-3.3367435-1.5681268-2.5692796-4.1374063-2.9362824-6.9069164-2.9362824zm4.7715562 3.2366282h1.9685879c2.5360807 0 4.7715562.8675793 4.7715562 3.7704035 0 2.3023919-1.7683574 4.5046686-6.3064842 4.5046686h-.4336599zm32.8336603 20.3208069v-3.3032853h-10.610923v-20.2541498h-4.805014v23.5574351zm19.119423 0v-3.20317h-11.344928v-7.374294h8.742191v-3.2366282h-8.742191v-6.5401729h9.977032v-3.20317h-14.748588v23.5574351zm-93.6580977 14.6417291c-.5392219-5.178242-4.7466571-6.5445821-8.5582997-6.5445821-8.4504035 0-9.780951 5.4298271-9.780951 7.9830259 0 4.422968 3.3442651 6.616427 8.1988184 7.407752 2.3731988.395533 5.3219308 1.114755 5.3219308 4.171124 0 1.977925-1.6181844 4.315332-5.3940345 4.315332-1.2584439 0-5.6456196-.215793-7.6593372-4.998502l-1.402392.503429c.3236888 3.775851 2.8768877 7.587493 9.4933142 7.587493 7.4077521 0 10.2485879-4.45902 10.2485879-8.414611 0-3.667694-2.1937176-6.472737-8.846196-7.731181-3.3800576-.647378-4.8545533-1.726081-4.8545533-3.8119023 0-3.2363688 3.5240057-3.9553314 5.5377233-3.9553314.8992219 0 4.9266571.1436888 6.2211528 3.8476946zm6.6465129-6.0113256v26.5494814h5.3782133v-11.770548c1.0154179.112825 1.9932277.263257 3.0462536.263257 4.8140922 0 10.305389-2.519481 10.305389-8.0476083 0-3.6477233-2.4823919-6.9945821-8.6503746-6.9945821zm5.3782133 3.6101153h2.4445245c2.4071758 0 5.3029971 1.128242 5.3029971 4.4751011 0 3.91098-4.3249279 4.926397-6.9201441 4.926397h-.8273775zm42.3824784 9.4455911c0-8.144352-4.7658502-13.2657929-12.412219-13.2657929-8.1088185 0-12.3056196 5.7260231-12.3056196 13.4079249 0 7.646628 4.1968011 13.23026 12.2345533 13.23026 10.0649568 0 12.4832853-8.179885 12.4832853-13.372392zm-5.4414986 0c0 4.587925-1.2802305 10.029423-6.8996542 10.029423-5.6902305 0-6.8638616-5.761556-6.8638616-10.349481 0-4.303401 1.6002882-9.6025072 6.7927954-9.6025072 5.4770317 0 6.9707204 5.3701732 6.9707204 9.9225652zm35.2792217 0c0-8.144352-4.765591-13.2657929-12.411959-13.2657929-8.108819 0-12.30562 5.7260231-12.30562 13.4079249 0 7.646628 4.196801 13.23026 12.234294 13.23026 10.064957 0 12.483285-8.179885 12.483285-13.372392zm-5.441239 0c0 4.587925-1.28049 10.029423-6.899654 10.029423-5.69049 0-6.864121-5.761556-6.864121-10.349481 0-4.303401 1.600547-9.6025072 6.793055-9.6025072 5.476772 0 6.97072 5.3701732 6.97072 9.9225652z"/><path d="m156.082565 60.6268012-7.583862 15.8768299-6.201441-15.8768299h-4.730576s8.486715 21.1474063 8.486455 21.1476657c0 0 .004928.2770028-2.246887 3.6625072-2.131211 3.2044668-5.03196 5.9807204-9.083776 6.3721037-3.801008.3672623-7.856714-.8276369-10.798962-2.9798559l-.725447.9124496.395533.3991642c2.258041 2.1628531 6.791499 4.1057637 10.70611 4.1057637 2.927983 0 5.826398-.8984438 8.258732-2.5238905 2.451008-1.6378962 4.177349-3.9846397 5.700086-6.4680691.460375-.7508646.893516-1.5178098 1.325879-2.2847551 2.361009-4.1885014 10.814525-22.1485591 10.903747-22.3430835z"/></g></g></svg>
+        </div>
+
+        <div class="recipe-info nui__row">
+          <div class="recipe-description nui__row nui__col-5 nui__col-8--desktop">
+            <div class="nui__col-5 nui__col-7--desktop text-input__loading">
+              <div class="recipe-name text-input__loading--line loading-item"></div>
+
+              <div class="recipe-labels">
+                <ul class="recipe-attributes__labels text-input__loading">
+
+                    <li class="recipe-attributes__label classic text-input__loading--line loading-item">
+                    </li>
+                </ul>
+              </div>
+
+              <div class="whats-cooking">
+                <h5></h5>
+                <p></p>
+              </div>
+
+              <div
+                class="author nui__row nui__nowrap hide-mobile">
+                <div
+                  class="author-picture nui__col-1--mobile">
+                </div>
+
+                <div class="author-info nui__col-4--tablet nui__col-6--desktop nui__column text-input__loading">
+                  <div class = "text-input__loading--line loading-item">
+                  </div>
+                  <div class ="text-input__loading--line loading-item"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe-data nui__col-4 nui__col-3--tablet text-input__loading">
+            <ul class="recipe-specs">
+              <li class="nui__row text-input__loading--line loading-item">
+                <label></label>
+                <div class="dish-details__attribute-detail">
+                  <span
+                    class="dish-details__attribute-detail">
+                    </span>
+                </div>
+              </li>
+
+              <li class="nui__row text-input__loading--line loading-item">
+                <label></label>
+                <p class="dish-details__attribute-detail">
+
+                </p>
+              </li>
+
+              <li class="nui__row text-input__loading--line loading-item">
+                <label></label>
+                <p>
+                  <span
+                    class="dish-details__attribute-detail">
+                    <span
+                      class="dish-details__attribute-detail"></span>
+                    <span
+                      class="dish-details__attribute-detail"></span>
+                    <span
+                      class="dish-details__attribute-detail"></span>
+                  </span>
+                </p>
+              </li>
+
+              <li class="nui__row text-input__loading--line loading-item">
+                  <label></label>
+                  <p>
+                    <span
+                      class="dish-details__attribute-detail">
+                    </span>
+                  </p>
+
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="recipe-pagination-container"></div>
+
+
+      </div>
+
+      <div id="siteFooter" class="footer" role="contentinfo">
+  <div class="siteMap siteMap-desktop nui__wrapper">
+  <nav class="siteMap__sections_wrap">
+    <div class="siteMap__section">
+      <h4>
+  <span class="header_text">Learn more</span>
+  <svg class="arrow_indicator" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="svg_fill_path" fill="black" d="M9.87998 1.29006L5.99998 5.17006L2.11998 1.29006C1.72998 0.900059 1.09998 0.900059 0.70998 1.29006C0.31998 1.68006 0.31998 2.31006 0.70998 2.70006L5.29998 7.29006C5.68998 7.68006 6.31998 7.68006 6.70998 7.29006L11.3 2.70006C11.69 2.31006 11.69 1.68006 11.3 1.29006C10.91 0.910059 10.27 0.900059 9.87998 1.29006Z"/>
+  </svg>
+</h4>
+      <ul>
+        <li><a href="/our-story">About us</a></li>
+        <li><a href="https://marleyspoon.com/careers" rel="noopener" target="_blank">Careers</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/imprint">Company</a></li>
+        <li>
+          <a href="https://marleyspoon.com/about/press">Press</a>
+        </li>
+          <li><a href="https://marleyspoon.com/about/affiliate">Affiliate Program</a></li>
+        <li><a href="https://ir.marleyspoon.com/investor-centre/?page=home">Investor Relations</a></li>
+      </ul>
+    </div>
+
+    <div class="siteMap__section">
+      <h4>
+  <span class="header_text">Interesting stuff</span>
+  <svg class="arrow_indicator" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="svg_fill_path" fill="black" d="M9.87998 1.29006L5.99998 5.17006L2.11998 1.29006C1.72998 0.900059 1.09998 0.900059 0.70998 1.29006C0.31998 1.68006 0.31998 2.31006 0.70998 2.70006L5.29998 7.29006C5.68998 7.68006 6.31998 7.68006 6.70998 7.29006L11.3 2.70006C11.69 2.31006 11.69 1.68006 11.3 1.29006C10.91 0.910059 10.27 0.900059 9.87998 1.29006Z"/>
+  </svg>
+</h4>
+      <ul>
+        <li><a href="/how">How it works</a></li>
+<li><a href="https://marleyspoon.com/delivery" rel="noopener" target="_blank">Meal delivery</a></li>
+<li><a href="https://marleyspoon.com/ingredients/ingredient-hub" rel="noopener" target="_blank">Ingredient Hub</a></li>
+<li><a href="https://marleyspoon.com/sustainability/recycle" rel="noopener" target="_blank">Recycling</a></li>
+<li><a href="http://marleyspoon.com/blog" target="_blank">Our blog</a></li>
+<li><a href="https://marleyspoon.com/offer/community-heroes-discount" rel="noopener" target="_blank">Hero Discounts</a></li>
+
+        
+          <li>
+      <a href="/blog/covid-19-updates" rel="noopener" target="_blank">COVID-19 Updates</a>
+
+  </li>
+
+      </ul>
+    </div>
+
+    <div class="siteMap__section">
+      <h4>
+  <span class="header_text">Contact us</span>
+  <svg class="arrow_indicator" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="svg_fill_path" fill="black" d="M9.87998 1.29006L5.99998 5.17006L2.11998 1.29006C1.72998 0.900059 1.09998 0.900059 0.70998 1.29006C0.31998 1.68006 0.31998 2.31006 0.70998 2.70006L5.29998 7.29006C5.68998 7.68006 6.31998 7.68006 6.70998 7.29006L11.3 2.70006C11.69 2.31006 11.69 1.68006 11.3 1.29006C10.91 0.910059 10.27 0.900059 9.87998 1.29006Z"/>
+  </svg>
+</h4>
+      <ul>
+          <li><a href="https://marleyspoon.com/about/partnership-enquiries" target="_blank">Partnership inquiry</a></li>
+        <li><a href="https://support.marleyspoon.com/hc/en-us?origin=us" target="_blank">Customer Service</a></li>
+          <li><a class="ot-sdk-show-settings" href="javascript:;">Cookie Settings</a></li>
+      </ul>
+    </div>
+
+    <div class="siteMap__section section_download_apps">
+      <h4>
+  <span class="header_text">Download via</span>
+  <svg class="arrow_indicator" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="svg_fill_path" fill="black" d="M9.87998 1.29006L5.99998 5.17006L2.11998 1.29006C1.72998 0.900059 1.09998 0.900059 0.70998 1.29006C0.31998 1.68006 0.31998 2.31006 0.70998 2.70006L5.29998 7.29006C5.68998 7.68006 6.31998 7.68006 6.70998 7.29006L11.3 2.70006C11.69 2.31006 11.69 1.68006 11.3 1.29006C10.91 0.910059 10.27 0.900059 9.87998 1.29006Z"/>
+  </svg>
+</h4>
+
+      <svg  class="app_store_qr_code" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" shape-rendering="crispEdges">
+  <path class="svg_background" fill="white" d="M0 0h41v41H0z"/>
+    <path class="svg_fill" stroke="black" d="M0 0.5h7m2 0h1m2 0h5m3 0h3m1 0h2m2 0h2m4 0h7M0 1.5h1m5 0h1m1 0h5m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m4 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h3m3 0h2m1 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h4m6 0h5m2 0h2m2 0h1m1 0h2m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h2m1 0h4m1 0h1m5 0h1m1 0h3m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m2 0h2m3 0h1m2 0h2m2 0h2m3 0h1m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h5m1 0h1m3 0h1m1 0h1m3 0h1m2 0h2m3 0h1M0 8.5h1m5 0h1m1 0h2m2 0h1m1 0h1m2 0h2m3 0h1m1 0h3m2 0h1m3 0h2m2 0h3M3 9.5h3m2 0h1m1 0h4m2 0h1m2 0h1m2 0h3m1 0h2m1 0h1m1 0h1m3 0h2M0 10.5h2m2 0h6m4 0h3m3 0h1m3 0h1m1 0h3m3 0h2m1 0h2M1 11.5h1m1 0h3m2 0h1m1 0h1m4 0h2m2 0h2m9 0h5m2 0h1m1 0h1M0 12.5h3m2 0h2m1 0h1m1 0h2m1 0h1m4 0h1m1 0h2m1 0h1m3 0h1m2 0h1m1 0h1m1 0h2m3 0h2M3 13.5h1m3 0h2m2 0h1m2 0h2m2 0h3m1 0h3m2 0h2m3 0h5m1 0h1m1 0h1M1 14.5h1m1 0h1m1 0h4m3 0h1m1 0h1m1 0h2m2 0h3m2 0h1m1 0h2m3 0h2m1 0h1M1 15.5h3m1 0h1m4 0h1m2 0h1m1 0h2m1 0h2m3 0h2m2 0h1m2 0h4m1 0h1m1 0h4M2 16.5h1m3 0h1m2 0h3m2 0h1m1 0h2m2 0h1m3 0h1m1 0h1m2 0h1m3 0h1m1 0h1m2 0h1M5 17.5h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h6m1 0h1m4 0h1m3 0h7m2 0h1M0 18.5h2m2 0h4m1 0h3m1 0h3m3 0h1m3 0h3m1 0h1m1 0h3m3 0h2m1 0h1m1 0h1M1 19.5h2m4 0h1m1 0h1m2 0h1m1 0h5m3 0h3m1 0h2m4 0h1m3 0h2m2 0h1M0 20.5h3m2 0h3m2 0h1m2 0h3m3 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h3M0 21.5h1m2 0h3m2 0h1m2 0h3m1 0h2m1 0h2m2 0h1m2 0h1m1 0h1m2 0h2m3 0h4M2 22.5h5m1 0h8m1 0h1m2 0h1m4 0h1m1 0h2m1 0h1m3 0h1M1 23.5h1m2 0h2m1 0h2m2 0h2m1 0h3m2 0h2m1 0h2m3 0h2m1 0h2m2 0h2m1 0h1M1 24.5h1m3 0h2m3 0h2m1 0h2m1 0h1m3 0h1m7 0h1m2 0h2m1 0h2m1 0h1m1 0h1M0 25.5h2m2 0h2m4 0h4m1 0h2m1 0h2m1 0h1m1 0h1m2 0h4m1 0h1m2 0h4m2 0h1M2 26.5h1m3 0h1m2 0h1m2 0h3m1 0h2m2 0h1m1 0h1m3 0h2m4 0h1m3 0h1M1 27.5h2m1 0h2m5 0h2m2 0h2m1 0h1m4 0h2m2 0h1m3 0h1m2 0h2m1 0h2M1 28.5h4m1 0h3m2 0h1m2 0h1m2 0h1m1 0h4m1 0h3m1 0h1m2 0h3m1 0h1m1 0h2m1 0h1M0 29.5h3m2 0h1m1 0h1m4 0h3m3 0h2m3 0h1m2 0h1m1 0h1m1 0h2m2 0h1m1 0h3m1 0h1M0 30.5h2m4 0h1m2 0h1m4 0h1m1 0h1m2 0h2m1 0h8m1 0h1m1 0h1m4 0h1m1 0h1M0 31.5h1m1 0h1m4 0h1m1 0h2m1 0h1m2 0h1m2 0h1m7 0h2m2 0h1m1 0h1m1 0h1m1 0h2M0 32.5h1m2 0h5m2 0h1m1 0h2m1 0h4m1 0h3m2 0h1m2 0h2m2 0h7M8 33.5h1m3 0h3m1 0h1m1 0h2m2 0h3m1 0h2m3 0h2m3 0h1m1 0h2M0 34.5h7m3 0h3m1 0h3m1 0h1m2 0h2m2 0h1m1 0h1m3 0h2m1 0h1m1 0h1m2 0h1M0 35.5h1m5 0h1m2 0h1m2 0h3m1 0h1m2 0h2m5 0h1m3 0h1m1 0h1m3 0h2m1 0h2M0 36.5h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h7m1 0h2m1 0h1m1 0h2m2 0h7m2 0h1M0 37.5h1m1 0h3m1 0h1m3 0h1m1 0h2m2 0h1m2 0h4m4 0h2m1 0h3m2 0h1m2 0h1m1 0h1M0 38.5h1m1 0h3m1 0h1m3 0h1m1 0h3m5 0h1m1 0h1m1 0h1m1 0h2m2 0h1m1 0h5m1 0h1M0 39.5h1m5 0h1m6 0h1m1 0h2m1 0h3m2 0h2m2 0h1m2 0h1m3 0h1m1 0h1m1 0h1m1 0h1M0 40.5h7m1 0h1m3 0h1m2 0h1m1 0h1m4 0h1m2 0h3m1 0h3m3 0h2m1 0h1"/>
+</svg>
+
+
+      <div class="app_download_badges">
+        <a href="https://yy6f.adj.st?adj_t=8fq6i4f&amp;adj_redirect=https%3A%2F%2Fapps.apple.com%2Fapp%2Fid1088840761" rel="noopener" target="_blank"><img alt="Appstore" src="/assets/logos/app_store/AppStore-79d633e6e881694bc8784472d83b203f.svg" /></a><a href="https://yy6f.adj.st?adj_t=8fq6i4f&amp;adj_redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marleyspoon" rel="noopener" target="_blank"><img alt="Google Play" src="/assets/logos/app_store/GooglePlay-5c9022fbdccfe456be83c1d1fb978492.svg" /></a>
+      </div>
+    </div>
+
+  </nav>
+</div>
+
+
+
+<div class="extraInfo">
+  <div class="hide-desktop hide-tablet subsection">
+    <h4>Download via</h4>
+    <div class="app_download_badges">
+      <a href="https://yy6f.adj.st?adj_t=8fq6i4f&amp;adj_redirect=https%3A%2F%2Fapps.apple.com%2Fapp%2Fid1088840761" rel="noopener" target="_blank"><img alt="Appstore" src="/assets/logos/app_store/AppStore-79d633e6e881694bc8784472d83b203f.svg" /></a><a href="https://yy6f.adj.st?adj_t=8fq6i4f&amp;adj_redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marleyspoon" rel="noopener" target="_blank"><img alt="Google Play" src="/assets/logos/app_store/GooglePlay-5c9022fbdccfe456be83c1d1fb978492.svg" /></a>
+    </div>
+  </div>
+
+  <div class="nui__wrapper nui__row subsection">
+    <div class="nui__column nui__one-third nui__flex">
+      
+  <div class="sitemap_social_networks">
+    <h4>Follow us</h4>
+    <ul class="items-list social-networks" role="navigation">
+        <li>
+          <a href="https://bit.ly/3BLw7fa" target="_blank" rel="noopener">
+            <img style="width: 26px" src="/images/logos/social_media/facebook.svg" alt="facebook"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://bit.ly/3Otfuwt" target="_blank" rel="noopener">
+            <img style="width: 26px" src="/images/logos/social_media/instagram.svg" alt="instagram"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://bit.ly/3BLaFqC" target="_blank" rel="noopener">
+            <img style="width: 26px" src="/images/logos/social_media/tiktok.svg" alt="tiktok"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://bit.ly/45kg59z" target="_blank" rel="noopener">
+            <img style="width: 26px" src="/images/logos/social_media/twitter.svg" alt="twitter"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://bit.ly/41T5Lm4" target="_blank" rel="noopener">
+            <img style="width: 26px" src="/images/logos/social_media/pinterest.svg" alt="pinterest"/>
+          </a>
+        </li>
+    </ul>
+  </div>
+
+    </div>
+    <div class="nui__column nui__one-third hide-mobile nui__flex">
+      
+    <h4>Pay with</h4>
+  <ul class="items-list payment-methods">
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/american-express.svg" alt="amex"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/mastercard-alt.svg" alt="mastercard"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/visa.svg" alt="visa"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/discover.svg" alt="discover"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/paypal.svg" alt="paypal"/>
+      </li>
+  </ul>
+
+    </div>
+  </div>
+
+  <div class="hide-desktop hide-tablet subsection">
+    
+    <h4>Pay with</h4>
+  <ul class="items-list payment-methods">
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/american-express.svg" alt="amex"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/mastercard-alt.svg" alt="mastercard"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/visa.svg" alt="visa"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/discover.svg" alt="discover"/>
+      </li>
+      <li>
+        <img style="width: 40px" src="/images/logos/payment/paypal.svg" alt="paypal"/>
+      </li>
+  </ul>
+
+  </div>
+
+</div>
+
+<div class="copyright">
+  <div class="nui__wrapper footer-content">
+    <a href="/" target="_blank">
+      <svg class="svg_logo copyright__logo" viewBox="0 0 160 23"><path class="path" d="M15.5388 15.274 13.4763 1.6868H11.952L7.8259 11.4244 3.5879 1.6868H2.0819L0 15.274H2.2487L3.3823 7.1335 6.9142 15.274H8.3265L11.7841 7.0566 12.881 15.274H15.5388ZM30.7623 15.274 24.7405 1.6868H23.8298L17.5841 15.274H19.9072L21.2086 12.2714H26.6362L27.9376 15.274H30.7634 30.7623ZM25.8363 10.4815H21.989L23.8847 6.0747 25.8363 10.4815ZM33.4384 1.6868V15.274H36.0962V9.27C36.6161 9.3659 37.0995 9.4238 37.6388 9.4238L40.9844 15.274H43.9587L40.2966 8.8275C41.6723 8.1733 42.5647 6.9607 42.5647 5.3056 42.5647 4.6704 42.3978 3.9203 42.0814 3.3809 41.2083 1.8985 39.7766 1.6868 38.2341 1.6868H33.4384ZM36.0962 3.5536H37.1931C38.6054 3.5536 39.8509 4.054 39.8509 5.728 39.8509 7.0554 38.8659 8.326 36.3373 8.326H36.0962V3.5536ZM55.1303 15.274V13.3692H49.2194V1.6868H46.5433V15.274H55.1303ZM66.8961 15.274V13.4261H60.5762V9.173H65.4461V7.3062H60.5762V3.5347H66.134V1.6868H57.9184V15.274H66.8961ZM97.1342 4.7472C96.8554 1.9765 94.6809 1.2443 92.7099 1.2443 88.3416 1.2443 87.6537 4.1498 87.6537 5.5163 87.6537 7.8835 89.3825 9.0571 91.8918 9.4806 93.1189 9.6924 94.6432 10.0769 94.6432 11.713 94.6432 12.7718 93.8068 14.0223 91.8552 14.0223 91.205 14.0223 88.9369 13.9064 87.8959 11.3475L87.1714 11.6172C87.3383 13.6378 88.6581 15.6774 92.078 15.6774 95.907 15.6774 97.3753 13.2912 97.3753 11.1736 97.3753 9.2109 96.2418 7.7096 92.8025 7.0365 91.0554 6.6898 90.2932 6.1125 90.2932 4.9969 90.2932 3.2649 92.1146 2.8804 93.1555 2.8804 93.6206 2.8804 95.7025 2.9573 96.371 4.94L97.1331 4.7472H97.1342ZM99.9782 1.6878V15.275H102.636V9.251C103.138 9.309 103.621 9.3859 104.142 9.3859 106.522 9.3859 109.236 8.0964 109.236 5.2677 109.236 3.4009 108.009 1.6878 104.96 1.6878H99.9782ZM102.636 3.5357H103.844C105.033 3.5357 106.465 4.1131 106.465 5.8261 106.465 7.8278 104.327 8.3471 103.045 8.3471H102.636V3.5346 3.5357ZM122.853 8.4374C122.853 4.278 120.502 1.6622 116.73 1.6622 112.73 1.6622 110.66 4.5868 110.66 8.5099 110.66 12.433 112.73 15.2673 116.695 15.2673 121.66 15.2673 122.853 11.0889 122.853 8.4374ZM120.168 8.4374C120.168 10.7802 119.538 13.5598 116.766 13.5598 113.994 13.5598 113.379 10.6175 113.379 8.2736 113.379 6.0758 114.168 3.3686 116.73 3.3686 119.432 3.3686 120.168 6.1114 120.168 8.4363V8.4374ZM137.185 8.4374C137.185 4.278 134.834 1.6622 131.062 1.6622 127.062 1.6622 124.991 4.5868 124.991 8.5099 124.991 12.433 127.062 15.2673 131.027 15.2673 135.992 15.2673 137.185 11.0889 137.185 8.4374ZM134.501 8.4374C134.501 10.7802 133.869 13.5598 131.097 13.5598 128.325 13.5598 127.711 10.6175 127.711 8.2736 127.711 6.0758 128.5 3.3686 131.062 3.3686 133.764 3.3686 134.501 6.1114 134.501 8.4363V8.4374ZM151.115 15.4467V1.6868H148.933V9.932L141.845 1.6868H139.452V15.274H141.652V5.3179L150.414 15.4467H151.115ZM80.1981 1.689 75.608 11.6384 71.8544 1.689H68.991L74.1279 14.9407C74.1279 14.9407 74.1311 15.1146 72.7683 17.2355 71.4787 19.2439 69.7229 20.9837 67.2707 21.2289 64.9703 21.4596 62.516 20.7106 60.7344 19.3609L60.2952 19.9327 60.5342 20.1823C61.9013 21.5376 64.6442 22.7558 67.0145 22.7558 68.7864 22.7558 70.5411 22.1929 72.0126 21.1743 73.496 20.1478 74.5412 18.6777 75.4627 17.1207 75.7415 16.6504 76.0031 16.17 76.2657 15.6886 77.6953 13.0638 82.8107 1.8094 82.8656 1.6879H80.1992L80.1981 1.689ZM153.115 4.7885C153.115 2.8157 154.649 1.2443 156.538 1.2443 158.427 1.2443 159.961 2.8157 159.961 4.7885 159.961 6.7612 158.443 8.3327 156.538 8.3327 154.633 8.3327 153.115 6.7444 153.115 4.7885ZM153.68 4.7885C153.68 6.4101 154.956 7.7475 156.538 7.7475 158.12 7.7475 159.396 6.4101 159.396 4.7885 159.396 3.1668 158.12 1.8294 156.538 1.8294 154.956 1.8294 153.68 3.1334 153.68 4.7885ZM156.441 5.2231H155.811V6.828H155.214V2.7656H156.813C157.571 2.7656 158.137 3.2504 158.137 4.0027 158.137 4.9055 157.362 5.2064 157.135 5.2064L158.185 6.828H157.458L156.441 5.2231ZM155.811 3.2839V4.6882H156.813C157.249 4.6882 157.523 4.4207 157.523 4.0027 157.523 3.5513 157.249 3.2839 156.813 3.2839H155.811Z" fill="#101820" /></svg>
+</a>
+    <span class="copyright__statement us">2024 © MMM Consumer Brands Inc. All rights reserved.</span>
+  </div>
+</div>
+
+<script defer >
+  jQuery(function ($){
+    $('#siteFooter').delegate('.siteMap__section h4','click', function(){
+      $(this).closest('.siteMap__section').toggleClass('expanded')
+    })
+  })
+</script>
+
+</div>
+
+
+
+      <script
+  defer
+    data-handle= 'marleyspoon'
+  id="__ada"
+  src="https://static.ada.support/embed2.js"
+></script>
+
+<script type="text/javascript">
+  var userID = ''
+    , email  = ''
+    , orders = ''
+    , name   = ''
+    , first_name = '';
+
+
+  window.adaSettings = {
+    language: 'en',
+    metaFields: {
+      country: 'us',
+      brand: 'ms',
+      current_url: window.location.href,
+      user_id: userID,
+      email: email,
+      orders: orders,
+      name: name,
+      first_name: first_name
+    },
+    chatterTokenCallback: (chatter) => {
+      if (!!gon.current_user_id) {
+        const mut = `
+mutation($userId:Int!) {
+  generateSteakAuthToken(userId: $userId){
+    token
+    error{
+      code
+      message
+    }
+  }
+}
+`
+      $.ajax({
+        url: gon.self_service_complaints_gql_url,
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+          query: mut,
+          variables: { userId: gon.current_user_id }
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + gon.api_token
+        }
+      }).then((resp) => {
+        const mutationResponse = resp.data.generateSteakAuthToken
+        window.adaEmbed.setMetaFields({
+          complaints_auth_token: mutationResponse.token,
+        });
+      })}
+    }
+  };
+</script>
+
+
+    <div id="origin_modal"
+      class="reveal-modal ms-modal basic-modal"
+      data-options="close_on_background_click:false;close_on_esc:false;"
+      data-reveal></div>
+
+    <div id="cancellation-confirmation-modal"
+      class="reveal-modal ms-modal basic-modal"
+      data-options="close_on_background_click:false;close_on_esc:false;"
+      data-reveal></div>
+
+    <div id="failed-payment-modal"
+      class="reveal-modal ms-modal basic-modal"
+      data-options="close_on_background_click:false;close_on_esc:false;"
+      data-reveal></div>
+
+  </body>
+</html>
