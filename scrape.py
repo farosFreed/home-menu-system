@@ -158,7 +158,7 @@ def analyze_html(url):
 
     ## Instructions ##
     instruction_regex = re.compile(".*instruction.*")
-    li_elements_2 = soup.find_all(['li', 'div'], attrs={'class': instruction_regex, 'data-testid': instruction_regex})
+    li_elements_2 = soup.find_all(['li', 'div'], {'class': instruction_regex})
     instructions = []
     # add get ol with prep steps
     for li in li_elements_2:
