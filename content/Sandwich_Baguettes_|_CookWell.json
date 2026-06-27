@@ -1,7 +1,12 @@
 {
         "url": "https://www.cookwell.com/recipe/sandwich-baguettes",
         "title": "Sandwich Baguettes | CookWell",
-        "ingredients": [],
+        "ingredients": [
+                "Baguette doughinstant yeast5 gwater, warm, around 105-115°F375 gbread flour, or all-purpose500 gsaltSalty10 g",
+                "For shaping & bakingbaking sprayFatparchment paperwater, ideally in a spritz bottle",
+                "Baguette doughinstant yeast5 gwater, warm, around 105-115°F375 gbread flour, or all-purpose500 gsaltSalty10 g",
+                "For shaping & bakingbaking sprayFatparchment paperwater, ideally in a spritz bottle"
+        ],
         "instructions": [],
         "image": "images/https3A2F2Fwwwcookwellcom2Frecipe2Fsandwich-baguettes.jpg"
 }
