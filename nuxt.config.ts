@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
+  app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/home-menu-system/' : '/'
+  },
   devtools: { enabled: true },
   modules: [
     '@nuxt/content',
@@ -10,6 +13,12 @@ export default defineNuxtConfig({
     experimental: {
       search: { indexed: true },
     },
+  },
+  nitro: {
+    preset: 'github-pages',
+    prerender: {
+      crawlLinks: true
+    }
   },
   pwa: {
     registerType: 'autoUpdate',
