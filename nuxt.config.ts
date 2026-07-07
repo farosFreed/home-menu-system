@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'github-pages',
+    logLevel: 5, // Force nitro to print full error logs
     prerender: {
       crawlLinks: true
     }
@@ -25,6 +26,9 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Home Menu App',
       short_name: 'Menu App',
+      // must match github pages path
+      scope: process.env.NODE_ENV === 'production' ? '/home-menu-system/' : '/',
+      start_url: process.env.NODE_ENV === 'production' ? '/home-menu-system/' : '/',
       description: 'A Nuxt 3 Progressive Web App',
       theme_color: '#4A90E2',
       icons: [
