@@ -33,12 +33,12 @@ export default defineNuxtConfig({
       theme_color: '#4A90E2',
       icons: [
         {
-          src: '/app-icon-small.png',
+          src: process.env.NODE_ENV === 'production' ? '/home-menu-system/app-icon-small.png' : '/app-icon-small.png',
           sizes: '192x192',
           type: 'image/png',
         },
         {
-          src: '/app-icon.webp',
+          src: process.env.NODE_ENV === 'production' ? '/home-menu-system/app-icon.webp' : '/app-icon.webp',
           sizes: '512x512',
           type: 'image/webp',
         },
