@@ -117,7 +117,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run generate
         env:
-          NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
+          NUXT_APP_BASE_URL: /home-menu-system/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public

@@ -45,6 +45,11 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
+      // Safely prevents dual forward slashes when parsing assets in subfolders
+      modifyURLPrefix: {
+        '/_nuxt/': '/_nuxt/',
+        '/': '/home-menu-system/'
+      },
       navigateFallback: '/',
       globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
       runtimeCaching: [
