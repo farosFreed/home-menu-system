@@ -18,7 +18,8 @@ export default defineNuxtConfig({
     preset: 'github-pages',
     logLevel: 5, // Force nitro to print full error logs
     prerender: {
-      crawlLinks: true
+      crawlLinks: true,
+      routes: ['/']
     }
   },
   pwa: {
